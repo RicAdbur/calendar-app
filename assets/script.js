@@ -2,13 +2,11 @@ var saveButton = $(".saveBtn");
 var currentDateDisplay = $("#currentDay");
 var currentDate = dayjs();
 var currentHour = dayjs().hour();
-var $timeBlocks = $('time-block')
-
-
-currentDateDisplay.text(currentDate);
+var $timeBlocks = $('.time-block')
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that the code isn't run until the browser has finished rendering all the elements in the html.
 $(function () {
+  currentDateDisplay.text(currentDate);
   // TODO: Add a listener for click events on the save button. This code should use the id in the containing time-block as a key to save the user input in local storage. HINT: What does `this` reference in the click listener function? How can DOM traversal be used to get the "hour-x" id of the time-block containing the button that was clicked? How might the id be useful when saving the description in local storage?
 
   saveButton.click(function() {
@@ -21,7 +19,24 @@ $(function () {
 
   // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. HINTS: How can the id attribute of each time-block be used to conditionally add or remove the past, present, and future classes? How can Day.js be used to get the current hour in 24-hour time?
   $timeBlocks.each(function() {
-    console.log( $(this) )
+    // select blocks by 'hour-#' ID
+    var $hourBlock = $(this)
+    // extract just the hour number from the IDs and convert string to integer
+    var splitID = parseInt($hourBlock.attr('id').split('-')[1])
+    console.log(currentHour, splitID)
+    // compare current hour in dayjs against hour from element IDs
+    var timeClass
+    if (currentHour === splitID) {
+      timeClass = "present"
+    }
+    else if (currentHour < splitID) {
+      timeClass = "future"
+    }
+    else {
+      timeClass = "past"
+    }
+    // add the class to the block
+    $hourBlock.addClass(timeClass)
   })
 
   
