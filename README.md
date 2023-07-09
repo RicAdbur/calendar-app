@@ -1,6 +1,6 @@
 # **Calendar App**
 
-This is a simple calendar app made in JavaScript.  It saves the text you type in each text area when you click the buttons, and it changes the color of each text area depending on whether the hour is in the past, present, or future.
+This is a simple calendar app made in JavaScript.  It saves the text you type in each text area when you click the buttons, and it visually displays whether listed events have passed, are currently happening, or have yet to happen.
 
 - Uses a click listener to save the text content of the hour blocks into local storage when you click the save icons
 
