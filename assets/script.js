@@ -1,7 +1,7 @@
 //  Global variables
 var $saveButton = $(".saveBtn");
 var $currentDateDisplay = $("#currentDay");
-var currentDate = dayjs().format("dddd MMMM DD, YYYY - h:mA");
+var currentDate = dayjs().format("dddd MMMM DD, YYYY - h:mmA");
 var currentHour = dayjs().hour();
 var $timeBlocks = $('.time-block')
 var text

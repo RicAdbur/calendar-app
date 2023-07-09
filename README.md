@@ -1,4 +1,4 @@
-# **Calendar App**
+# [**Calendar App**](https://ricadbur.github.io/calendar-app/)
 
 This is a simple calendar app made in JavaScript.  It saves the text you type in each text area when you click the buttons, and it visually displays whether listed events have passed, are currently happening, or have yet to happen.
 
@@ -9,7 +9,6 @@ This is a simple calendar app made in JavaScript.  It saves the text you type in
 - Loops through each hour block and applies a CSS class to them that changes their color, depending on how the listed hour compares against the current time
 
 ---
-[Calendar App](https://ricadbur.github.io/calendar-app/)
 ![Screenshot](./assets/calendar-app.png)
 
 ---
