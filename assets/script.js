@@ -1,30 +1,33 @@
+//  Global variables
 var $saveButton = $(".saveBtn");
 var $currentDateDisplay = $("#currentDay");
-var currentDate = dayjs();
+var currentDate = dayjs().format("dddd MMMM DD, YYYY - h:mA");
 var currentHour = dayjs().hour();
 var $timeBlocks = $('.time-block')
 var text
 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that the code isn't run until the browser has finished rendering all the elements in the html.
 $(function () {
+  // setting the current date into the date display in the header using Day.js
   $currentDateDisplay.text(currentDate);
-  // TODO: Add a listener for click events on the save button. This code should use the id in the containing time-block as a key to save the user input in local storage. HINT: What does `this` reference in the click listener function? How can DOM traversal be used to get the "hour-x" id of the time-block containing the button that was clicked? How might the id be useful when saving the description in local storage?
 
+  // click listener for the save icons
   $saveButton.click(function() {
-    // var elementNumber = parseInt($(this).parent().attr("id").split("-")[1])
+    // Finding the IDs of the button's parent elements
     var elementID = $(this).parent().attr("id")
     console.log(elementID)
+    // Finding the text areas within the parent elements of the buttons and getting their text content
     var textValue = $(this).parent().children('.description').val();
     console.log(textValue)
+    // saving the text content of the text areas to localStorage using the parent element IDs as keys
     localStorage.setItem(elementID, textValue)
   })
 
-  // TODO: Add code to apply the past, present, or future class to each time block by comparing the id to the current hour. HINTS: How can the id attribute of each time-block be used to conditionally add or remove the past, present, and future classes? How can Day.js be used to get the current hour in 24-hour time?
   $timeBlocks.each(function() {
     // select the blocks by their 'hour-#' ID
     var $hourBlock = $(this)
     // select the IDs of individual hour blocks
-    var $hourBlockIDs = $hourBlock.attr('id')
+    var $hourBlockID = $hourBlock.attr('id')
     // extract just the hour number from the IDs and convert string to integer
     var $splitID = parseInt($hourBlock.attr('id').split('-')[1])
     // empty variable that will get assigned a class from the if statements
@@ -42,17 +45,10 @@ $(function () {
     }
     // add the class to the block
     $hourBlock.addClass(timeClass)
-    
-    // TODO: Add code to get any user input that was saved in localStorage and set the values of the corresponding textarea elements. HINT: How can the id attribute of each time-block be used to do this?
 
-    for (var i = 0; i < $timeBlocks.length; i++) {
-      if (localStorage.key == $hourBlockIDs) {
-        console.log(localStorage.key, $hourBlockIDs)
-
-      }
-    }
-
+    // Retrieving the saved text content from local storage using their keys, which match with the time block IDs
+    text = localStorage.getItem($hourBlockID)
+    // Setting the retrieved local storage text content into each text area as content upon page load
+    $(this).find('.description').val(text)
   })
-
-
 });
